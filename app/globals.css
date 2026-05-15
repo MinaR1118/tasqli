@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Blinking cursor for streaming preview */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.cursor-blink {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background-color: currentColor;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  animation: cursor-blink 0.9s step-end infinite;
+}
+
+/* Proposal prose — markdown output styling */
+.proposal-prose h1 { @apply text-2xl font-bold text-gray-900 mt-8 mb-4 leading-tight; }
+.proposal-prose h2 { @apply text-xl  font-semibold text-gray-900 mt-6 mb-3 leading-snug; }
+.proposal-prose h3 { @apply text-lg  font-semibold text-gray-900 mt-5 mb-2; }
+.proposal-prose p  { @apply text-gray-700 leading-relaxed mb-4; }
+.proposal-prose ul { @apply list-disc ml-6 mb-4 text-gray-700 space-y-1; }
+.proposal-prose ol { @apply list-decimal ml-6 mb-4 text-gray-700 space-y-1; }
+.proposal-prose li { @apply leading-relaxed; }
+.proposal-prose strong { @apply font-semibold text-gray-900; }
+.proposal-prose em    { @apply italic; }
+.proposal-prose hr    { @apply my-6 border-gray-200; }
+.proposal-prose blockquote { @apply border-l-4 border-brand-300 pl-4 italic text-gray-600 my-4; }
+.proposal-prose h1:first-child { @apply mt-0; }
+
+/* Page margins and auto sizing — suppresses browser header/footer chrome */
+@page {
+  margin: 1cm;
+  size: auto;
+}
+
+/* Print styles */
+@media print {
+  aside,
+  header,
+  [data-no-print] {
+    display: none !important;
+  }
+
+  /*
+   * The app shell uses:
+   *   div.flex.h-screen.overflow-hidden          ← body > div > div
+   *   div.flex.min-w-0.flex-1.overflow-hidden    ← body > div > div > div
+   *   main.flex-1.overflow-y-auto
+   *
+   * h-screen = 100vh in print = exactly one page; overflow-hidden clips the rest.
+   * Reset every ancestor up to and including main so content flows freely.
+   */
+  html,
+  body,
+  body > div,
+  body > div > div,
+  body > div > div > div,
+  main {
+    display: block !important;
+    height: auto !important;
+    min-height: unset !important;
+    max-height: none !important;
+    overflow: visible !important;
+    flex: none !important;
+    background: white !important;
+  }
+
+  main {
+    padding: 0 !important;
+  }
+
+  /* Remove the page-level max-width and centering so prose fills the paper */
+  #proposal-print-content {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Strip the card chrome in print */
+  #proposal-print-content .proposal-prose-card {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  /* Proposal prose: full width, no height ceiling */
+  .proposal-prose {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* Keep headings with the paragraph that follows them */
+  .proposal-prose h1,
+  .proposal-prose h2,
+  .proposal-prose h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* Don't split a paragraph or list item across pages */
+  .proposal-prose p,
+  .proposal-prose li,
+  .proposal-prose blockquote {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .proposal-prose h1 { font-size: 1.5rem; }
+  .proposal-prose h2 { font-size: 1.25rem; }
+  .proposal-prose p,
+  .proposal-prose li  { font-size: 0.95rem; }
+}
