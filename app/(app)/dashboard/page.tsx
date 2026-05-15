@@ -139,11 +139,16 @@ export default async function DashboardPage({
             ))}
           </Card>
         ) : (
-          <div className="rounded-xl border border-dashed border-gray-300 bg-white px-6 py-12 text-center">
-            <p className="text-sm text-gray-500">No proposals yet.</p>
+          <div className="rounded-xl border border-dashed border-gray-300 bg-white px-6 py-14 text-center">
+            <p className="text-sm font-medium text-gray-700">
+              No proposals yet.
+            </p>
+            <p className="mt-1 text-sm text-gray-500">
+              Create your first one to see how easy it is.
+            </p>
             <Link href="/proposals/new">
-              <Button variant="secondary" size="sm" className="mt-3">
-                Create your first proposal →
+              <Button variant="secondary" size="sm" className="mt-4">
+                New proposal
               </Button>
             </Link>
           </div>

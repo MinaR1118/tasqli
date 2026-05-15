@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 const VA_NAV = [
   { label: "Dashboard", href: "/dashboard" },
   { label: "Proposals", href: "/proposals/new" },
-  { label: "Projects", href: "/projects/new" },
+  { label: "Projects", href: "/projects" },
 ];
 
 const CLIENT_NAV = [{ label: "Projects", href: "/projects" }];
