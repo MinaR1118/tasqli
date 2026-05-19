@@ -7,10 +7,9 @@ import { Button } from "@/components/ui/Button";
 const VA_NAV = [
   { label: "Dashboard", href: "/dashboard" },
   { label: "Proposals", href: "/proposals/new" },
-  { label: "Projects", href: "/projects" },
 ];
 
-const CLIENT_NAV = [{ label: "Projects", href: "/projects" }];
+const CLIENT_NAV: { label: string; href: string }[] = [];
 
 interface NavProps {
   role: string;
@@ -30,7 +29,9 @@ export function AppSidebar({ role, displayName }: NavProps) {
     <aside className="hidden w-64 shrink-0 flex-col border-r border-gray-200 bg-white md:flex">
       {/* Logo */}
       <div className="flex h-16 shrink-0 items-center border-b border-gray-200 px-6">
-        <span className="text-xl font-semibold text-brand-500">tasqli</span>
+        <Link href="/dashboard" className="text-xl font-semibold text-brand-500">
+          tasqli
+        </Link>
       </div>
 
       {/* Nav links */}
@@ -73,7 +74,9 @@ export function MobileTopBar({ role }: NavProps) {
   return (
     <header className="shrink-0 border-b border-gray-200 bg-white md:hidden">
       <div className="flex h-14 items-center justify-between px-4">
-        <span className="text-lg font-semibold text-brand-500">tasqli</span>
+        <Link href="/dashboard" className="text-lg font-semibold text-brand-500">
+          tasqli
+        </Link>
         <Button variant="ghost" size="sm" onClick={signOutAndRedirect}>
           Sign out
         </Button>

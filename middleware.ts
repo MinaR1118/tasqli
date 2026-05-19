@@ -18,11 +18,11 @@ export async function middleware(request: NextRequest) {
   }
 
   // Public routes that don't require authentication
-  if (pathname === "/" || pathname === "/login") {
+  if (pathname === "/" || pathname === "/login" || pathname.startsWith("/p/")) {
     return supabaseResponse;
   }
 
-  // Everything else (including /portal/ client routes) requires a session
+  // Everything else requires a session
   if (!user) {
     const loginUrl = new URL("/login", request.url);
     loginUrl.searchParams.set("next", pathname);
